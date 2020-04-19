@@ -19,7 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->text('details');
-            $table->integer('quantity');
+            $table->integer('available');
             $table->timestamps();
 
             $table->foreign('seller_id')
