@@ -17,7 +17,7 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->unsignedBigInteger('customer_id');
             $table->unsignedBigInteger('seller_id');
-            $table->string('destination');
+            $table->unsignedBigInteger('shipping_info_id');
             $table->boolean('delivered')->default(false);
             $table->boolean('canceled')->default(false);
             $table->timestamps();
@@ -26,13 +26,19 @@ class CreateOrdersTable extends Migration
                 ->on('customers')
                 ->references('id')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
 
             $table->foreign('seller_id')
                 ->on('sellers')
                 ->references('id')
                 ->onUpdate('cascade')
-                ->onDelete('cascade');
+                ->onDelete('restrict');
+
+            $table->foreign('shipping_info_id')
+                ->on('shipping_infos')
+                ->references('id')
+                ->onUpdate('cascade')
+                ->onDelete('restrict');
         });
     }
 

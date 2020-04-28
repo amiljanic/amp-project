@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderItemsTable extends Migration
+class CreateDefaultShippingInfosTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,23 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('default_shipping_infos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->nullable();
-            $table->unsignedBigInteger('variant_id');
-            $table->integer('quantity')->default(1);
-            $table->double('unit_price');
+            $table->unsignedBigInteger('customer_id')->unique();
+            $table->unsignedBigInteger('shipping_info_id');
             $table->timestamps();
 
-            $table->foreign('order_id')
-                ->on('orders')
+            $table->foreign('customer_id')
+                ->on('customers')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('variant_id')
-                ->on('variants')
+            $table->foreign('shipping_info_id')
+                ->on('shipping_infos')
                 ->references('id')
                 ->onUpdate('cascade')
-                ->onDelete('restrict');
-
+                ->onDelete('cascade');
         });
     }
 
@@ -43,6 +40,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('default_shipping_infos');
     }
 }

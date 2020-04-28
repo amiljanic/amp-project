@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateOrderItemsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,26 +13,27 @@ class CreateOrderItemsTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_items', function (Blueprint $table) {
+        Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('order_id')->nullable();
-            $table->unsignedBigInteger('variant_id');
-            $table->integer('quantity')->default(1);
-            $table->double('unit_price');
+            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('category_id');
+            $table->string('name');
+            $table->string('description');
+            $table->text('details');
+            $table->boolean('available');
             $table->timestamps();
 
-            $table->foreign('order_id')
-                ->on('orders')
+            $table->foreign('seller_id')
+                ->on('sellers')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
 
-            $table->foreign('variant_id')
-                ->on('variants')
+            $table->foreign('category_id')
+                ->on('categories')
                 ->references('id')
                 ->onUpdate('cascade')
                 ->onDelete('restrict');
-
         });
     }
 
@@ -43,6 +44,6 @@ class CreateOrderItemsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('order_items');
+        Schema::dropIfExists('products');
     }
 }

@@ -4,19 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CartItem extends Model
+class DefaultShippingInfo extends Model
 {
-    /**
-     * @var mixed
-     */
-
     public function customer()
     {
         return $this->belongsTo(Customer::class);
     }
 
-    public function variant()
+    public function shippingInfo()
     {
-        return $this->belongsTo(Variant::class);
+        return $this->belongsTo();
     }
 }
