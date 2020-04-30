@@ -23,11 +23,6 @@ class Product extends Model
 
     public function specifications()
     {
-        return $this->belongsToMany(
-            Specification::class,
-            'product_specification',
-            'product_id',
-            'specification_id'
-        );
+        return $this->belongsToMany(Specification::class)->withTimestamps();
     }
 }

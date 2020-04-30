@@ -18,7 +18,7 @@ class CreateVariantsTable extends Migration
             $table->unsignedBigInteger('product_id');
             $table->double('price');
             $table->integer('stock');
-            $table->boolean('available');
+            $table->boolean('available')->default(true);
             $table->timestamps();
 
             $table->foreign('product_id')

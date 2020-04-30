@@ -20,9 +20,15 @@ class Customer extends Model
         return $this->hasMany(CartItem::class);
     }
 
-    public function defaultShippingInfo()
+    public function shippingInfo()
     {
-        return $this->hasOne(DefaultShippingInfo::class);
+        //return $this->hasOne(DefaultShippingInfo::class);
+        return $this->belongsToMany(
+            ShippingInfo::class,
+            'default_shipping_infos',
+            'customer_id',
+            'shipping_info_id'
+        )->withTimestamps();
     }
 
     public function shippingInfos()
@@ -30,9 +36,19 @@ class Customer extends Model
         return $this->hasMany(ShippingInfo::class);
     }
 
+    public function defaultShippingInfo()
+    {
+        return $this->shippingInfo()->first();
+    }
+
     public function country()
     {
         return $this->belongsTo(Country::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
     }
 
     public function following()
@@ -42,6 +58,6 @@ class Customer extends Model
             'follows',
             'customer_id',
             'seller_id'
-        );
+        )->withTimestamps();
     }
 }

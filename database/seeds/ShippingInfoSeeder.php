@@ -1,5 +1,6 @@
 <?php
 
+use App\ShippingInfo;
 use Illuminate\Database\Seeder;
 
 class ShippingInfoSeeder extends Seeder
@@ -11,6 +12,6 @@ class ShippingInfoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(ShippingInfo::class, 10)->create();
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-use App\CartItem;
 use App\Customer;
+use App\Seller;
 use Illuminate\Database\Seeder;
 
-class CartItemSeeder extends Seeder
+class FollowSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,10 +14,7 @@ class CartItemSeeder extends Seeder
     public function run()
     {
         Customer::all()->each(function ($customer){
-            factory(CartItem::class, 3)->create([
-                'customer_id' => $customer->id,
-            ]);
+            $customer->following()->attach(Seller::all()->random(3));
         });
-
     }
 }

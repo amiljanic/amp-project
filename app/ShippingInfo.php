@@ -15,4 +15,19 @@ class ShippingInfo extends Model
     {
         return $this->hasMany(Order::class);
     }
+
+    public function defaultTo()
+    {
+        return $this->belongsToMany(
+            Customer::class,
+            'default_shipping_infos',
+            'shipping_info_id',
+            'customer_id'
+        )->withTimestamps();
+    }
+
+    public function defaultToCustomer()
+    {
+        return $this->defaultTo()->first();
+    }
 }

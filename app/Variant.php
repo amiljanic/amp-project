@@ -13,12 +13,7 @@ class Variant extends Model
 
     public function specifications()
     {
-        return $this->belongsToMany(
-            Specification::class,
-            'variant_specification',
-            'variant_id',
-            'specification_id'
-        );
+        return $this->belongsToMany(Specification::class)->withTimestamps();
     }
 
 }

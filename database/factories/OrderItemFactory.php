@@ -2,13 +2,17 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Order;
 use App\OrderItem;
+use App\Variant;
 use Faker\Generator as Faker;
 
 $factory->define(OrderItem::class, function (Faker $faker) {
+    $variant = Variant::all()->random();
     return [
-        'product_id' => factory(\App\Product::class),
+        'order_id' => Order::all()->random()->id,
+        'variant_id' => $variant->id,
         'quantity' => $faker->numberBetween(1, 10),
-        'order_id' => factory(\App\Order::class),
+        'unit_price' => $variant->price,
     ];
 });

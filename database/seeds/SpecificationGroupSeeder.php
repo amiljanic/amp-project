@@ -1,5 +1,6 @@
 <?php
 
+use App\SpecificationGroup;
 use Illuminate\Database\Seeder;
 
 class SpecificationGroupSeeder extends Seeder
@@ -11,6 +12,6 @@ class SpecificationGroupSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(SpecificationGroup::class, 10)->create();
     }
 }

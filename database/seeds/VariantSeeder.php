@@ -1,5 +1,6 @@
 <?php
 
+use App\Variant;
 use Illuminate\Database\Seeder;
 
 class VariantSeeder extends Seeder
@@ -11,6 +12,6 @@ class VariantSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Variant::class, 10)->create();
     }
 }

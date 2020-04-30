@@ -16,7 +16,7 @@ class CreateDefaultShippingInfosTable extends Migration
         Schema::create('default_shipping_infos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('customer_id')->unique();
-            $table->unsignedBigInteger('shipping_info_id');
+            $table->unsignedBigInteger('shipping_info_id')->unique();
             $table->timestamps();
 
             $table->foreign('customer_id')

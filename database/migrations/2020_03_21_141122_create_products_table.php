@@ -20,7 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('name');
             $table->string('description');
             $table->text('details');
-            $table->boolean('available');
+            $table->boolean('available')->default(true);
             $table->timestamps();
 
             $table->foreign('seller_id')

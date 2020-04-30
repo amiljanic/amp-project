@@ -1,5 +1,7 @@
 <?php
 
+use App\Customer;
+use App\ShippingInfo;
 use Illuminate\Database\Seeder;
 
 class DefaultShippingInfoSeeder extends Seeder
@@ -11,6 +13,9 @@ class DefaultShippingInfoSeeder extends Seeder
      */
     public function run()
     {
-        //
+        ShippingInfo::distinct()->get('customer_id')->each(function ($info){
+            $shippingInfo = ShippingInfo::all()->where('customer_id', $info->customer_id)->first();
+            $shippingInfo->defaultTo()->attach(Customer::find($info->customer_id));
+        });
     }
 }
